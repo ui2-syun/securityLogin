@@ -35,11 +35,10 @@ public class UserController {
     public String signup(UserInfoDto infoDto,HttpServletRequest request, HttpServletResponse response) throws ServletException { // 회원 추가
 
 
+        Authentication auth =  userService.save(infoDto);
+        SecurityContextHolder.getContext().setAuthentication(auth);
 
-        userService.save(infoDto);
-        /*Authentication auth =  userService.loadUserByUsername(infoDto.getEmail());
-        SecurityContextHolder.getContext().setAuthentication(auth);*/
-
+        //
         /*try {
             userService.loadUserByUsername(infoDto.getEmail());
         }catch (UsernameNotFoundException e){
@@ -47,7 +46,7 @@ public class UserController {
 
         }*/
 
-
+        //세션 확인
         /*HttpSession session = (HttpSession)request.getSession();
         String name = (String) session.getAttribute("sessionId");
         System.out.println("===================================");
@@ -57,7 +56,7 @@ public class UserController {
         name = "hello";
         session.setAttribute("sessionId",name);*/
 
-           return  "redirect:/main";
+           return  "redirect:/";
 
 
 

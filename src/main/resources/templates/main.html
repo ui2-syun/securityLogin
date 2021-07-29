@@ -9,7 +9,7 @@
 <h2>회원 전용 페이지</h2><hr>
 
 ID : <span sec:authentication="name"></span> <br>
-<!--Name : <span sec:authentication="name"></span> <br>-->
+<!--Name : <span sec:authentication="principal.getUsername()"></span> <br>-->
 소유 권한 : <span sec:authentication="authorities"></span> <br>
 <a th:href="@{'/admin'}">관리자로 이동</a>
 <form id="logout" action="/logout" method="POST">

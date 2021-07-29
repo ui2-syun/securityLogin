@@ -24,22 +24,22 @@ public class UserService implements UserDetailsService {
     @return 저장되는 회원의 PK
     */
 
-    public Long save(UserInfoDto infoDto) {
+    public Authentication save(UserInfoDto infoDto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         infoDto.setPassword(encoder.encode(infoDto.getPassword()));
 
-          return userRepository.save(UserInfo.builder()
+           userRepository.save(UserInfo.builder()
                 .email(infoDto.getEmail())
                 .auth(infoDto.getAuth())
                 .NAME(infoDto.getName())
                 .password(infoDto.getPassword()).build()).getCode();
 
 
-       /* UsernamePasswordAuthenticationToken authenticationToken =
+        UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loadUserByUsername(infoDto.getEmail()).getEmail(),
                         null,loadUserByUsername(infoDto.getEmail()).getAuthorities());
 
-        return authenticationToken;*/
+        return authenticationToken;
 
     }
 
