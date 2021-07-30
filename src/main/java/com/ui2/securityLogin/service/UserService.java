@@ -24,6 +24,7 @@ public class UserService implements UserDetailsService {
     @return 저장되는 회원의 PK
     */
 
+
     public Authentication save(UserInfoDto infoDto) {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         infoDto.setPassword(encoder.encode(infoDto.getPassword()));
@@ -34,7 +35,10 @@ public class UserService implements UserDetailsService {
                 .NAME(infoDto.getName())
                 .password(infoDto.getPassword()).build()).getCode();
 
+        //토큰 생성
 
+        //id와 를 조합해서 UsernamePasswordAuthenticationToken 인스턴스를 생성
+        //인증 성공하면 Authentication 인스턴스를 리턴
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loadUserByUsername(infoDto.getEmail()).getEmail(),
                         null,loadUserByUsername(infoDto.getEmail()).getAuthorities());

@@ -35,9 +35,17 @@ public class UserController {
     public String signup(UserInfoDto infoDto,HttpServletRequest request, HttpServletResponse response) throws ServletException { // 회원 추가
 
 
-        Authentication auth =  userService.save(infoDto);
-        SecurityContextHolder.getContext().setAuthentication(auth);
 
+        //회원 가입 이후의 정보 등록과 자동 로그인 처리
+
+        //service에서 리턴 한 authenticationToken을
+        Authentication auth =  userService.save(infoDto);
+        //Spring Security에서 담은(service에서 리턴) AuthenticationToken을 SecurityContext에 보관
+        //SecurityContext를 SecurityContextHolder에 보관
+        // Authentication 인스턴스를 밑의 코드에 set
+        SecurityContextHolder.getContext().setAuthentication(auth); //로그인 처리
+
+        return  "redirect:/";
         //
         /*try {
             userService.loadUserByUsername(infoDto.getEmail());
@@ -56,7 +64,7 @@ public class UserController {
         name = "hello";
         session.setAttribute("sessionId",name);*/
 
-           return  "redirect:/";
+
 
 
 
