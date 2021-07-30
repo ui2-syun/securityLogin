@@ -35,8 +35,15 @@ class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     @WithAnonymousUser
     public void test_annonymous() throws Exception{
 
+                //요청을 전송하는 역할
+                //http메소드 결정(get,post,put,delete)
         mockMvc.perform(get("/"))
+                //응답을 검증
+                //상태코드 ( status() )
+                // isOk():200  , isNotFound():404 ,
+                // isMethodNotAllowed() : 405 , isInternalServerError() : 500
                 .andExpect(status().isOk())
+                //요청, 응답 전체 메세지 확인
                 .andDo(print());
     }
 
@@ -70,6 +77,17 @@ class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
 
         mockMvc.perform(get("/admin"))
                 .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @DisplayName("어드민 유저 진입")
+    //성공
+    @Test
+    @WithMockUser(username = "test", roles = "USER")
+    public void test_logout() throws Exception{
+
+        mockMvc.perform(post("/logout"))
+                .andExpect(redirectedUrl("/logout"))
                 .andDo(print());
     }
 
