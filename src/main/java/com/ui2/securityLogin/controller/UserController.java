@@ -32,7 +32,7 @@ public class UserController {
     private final UserRepository userRepository;
 
     @PostMapping("/user")
-    public String signup(UserInfoDto infoDto,HttpServletRequest request, HttpServletResponse response) throws ServletException { // 회원 추가
+    public String signup(UserInfoDto infoDto)  { // 회원 추가
 
 
 
@@ -63,9 +63,6 @@ public class UserController {
 
         name = "hello";
         session.setAttribute("sessionId",name);*/
-
-
-
 
 
     }
