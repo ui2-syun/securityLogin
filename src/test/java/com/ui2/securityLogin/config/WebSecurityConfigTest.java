@@ -33,7 +33,7 @@ class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     @DisplayName("익명 유저 진입")
     @Test
     @WithAnonymousUser
-    public void test_annonymous_Login() throws Exception{
+    public void test_annonymous() throws Exception{
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
@@ -44,7 +44,7 @@ class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     //성공
     @Test
     @WithMockUser(username = "test", roles = "USER")
-    public void test_user_Login() throws Exception{
+    public void test_user() throws Exception{
 
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
@@ -55,7 +55,7 @@ class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     //실패
     @Test
     @WithMockUser(username = "test", roles = "USER")
-    public void test_user_Login() throws Exception{
+    public void test_user() throws Exception{
 
         mockMvc.perform(get("/admin"))
                 .andExpect(status().isOk())
@@ -66,7 +66,7 @@ class WebSecurityConfigTest extends WebSecurityConfigurerAdapter {
     //성공
     @Test
     @WithMockUser(username = "test", roles = "ADMIN")
-    public void test_admin_Login() throws Exception{
+    public void test_admin() throws Exception{
 
         mockMvc.perform(get("/admin"))
                 .andExpect(status().isOk())
